@@ -21,6 +21,28 @@ body { background-color: #0d0e12; color: #ffffff; overflow-x: hidden; }
     -webkit-tap-highlight-color: transparent; /* Remove aquele quadrado azul ao clicar no celular */
 }
 
+/* Scroll-Snap Horizontal para as Vitrines (100% Nativo e Leve) */
+.cards-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding-bottom: 30px;
+    -webkit-overflow-scrolling: touch; /* Suavidade no iOS */
+    scrollbar-width: none; /* Oculta a barra no Firefox */
+}
+
+.cards-grid::-webkit-scrollbar {
+    display: none; /* Oculta a barra no Chrome/Safari */
+}
+
+.product-card {
+    min-width: 85vw; /* O cartão ocupa 85% da tela do celular, revelando uma pontinha do próximo */
+    max-width: 400px;
+    scroll-snap-align: center; /* Centraliza o card perfeitamente ao soltar o dedo */
+    flex-shrink: 0;
+}
+
 body.mobile-optimized {
     background-color: var(--bg-dark);
     color: var(--text-light);
