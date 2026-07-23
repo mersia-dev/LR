@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caçador de Cupons | Achados Validados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <canvas id="canvas3d"></canvas>
+    <header class="navbar">
+        <div class="logo">🔎 GARIMPO<span>OFERTAS</span></div>
+        <nav>
+            <a href="#hero">Início</a>
+            <a href="#produtos">Achadinhos 3D</a>
+            <a href="#isca">Checklist Grátis</a>
+            <a href="#vip" class="btn-nav">Grupo VIP</a>
+        </nav>
+    </header>
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <span class="tagline">⭐ PRODUTOS TESTADOS COM NOTA 4.8+</span>
+            <h1>O Garimpo de Ofertas Definitivo da Internet</h1>
+            <p>Testamos e filtramos milhares de produtos para você comprar apenas o que funciona, sem cair em ciladas e pelo menor preço.</p>
+            <div class="cta-group">
+                <a href="#vip" class="btn-primary">🚀 Entrar no Grupo de Cupons VIP</a>
+                <a href="#produtos" class="btn-secondary">📦 Ver Achadinhos de Hoje</a>
+            </div>
+        </div>
+    </section>
+    <section id="produtos" class="showcase-section">
+        <h2 class="section-title">Vitrines Interativas em Alta</h2>
+        <p class="section-subtitle">Passe o mouse / toque para interagir com o card de ofertas</p>
+        <div class="cards-grid">
+            {% for p in products %}
+            <div class="product-card" data-tilt>
+                <div class="card-badge">{{ p.badge }}</div>
+                <div class="card-img-placeholder" style="background-color: {{ p.image_color }};">
+                    <span class="icon-3d">📦</span>
+                </div>
+                <div class="card-body">
+                    <span class="category">{{ p.category }}</span>
+                    <h3>{{ p.title }}</h3>
+                    <div class="rating">⭐ {{ p.rating }} ({{ p.reviews }} avaliações)</div>
+                    <div class="price-box">
+                        <span class="old-price">R$ {{ "%.2f"|format(p.old_price) }}</span>
+                        <span class="new-price">R$ {{ "%.2f"|format(p.new_price) }}</span>
+                        <span class="discount-tag">-{{ p.discount }}</span>
+                    </div>
+                    <div class="coupon-box">
+                        <span>Cupom: <strong>{{ p.coupon_code }}</strong></span>
+                    </div>
+                    <a href="{{ p.affiliate_url }}" target="_blank" class="btn-card">Pegar Desconto Agora</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section id="isca" class="isca-section">
+        <div class="isca-container">
+            <div class="isca-text">
+                <h2>📥 Baixe Grátis: Checklist Secreto de Cupons</h2>
+                <p>Descubra em menos de 15 minutos a ordem exata para acumular cupons sem erro!</p>
+                <ul>
+                    <li>✅ Regra dos 3 passos para validar vendedores</li>
+                    <li>✅ Horários exatos de cupons altos</li>
+                    <li>✅ Como combinar cupom de plataforma + loja</li>
+                </ul>
+            </div>
+            <div class="isca-form-card">
+                <h3>Receber no WhatsApp/E-mail</h3>
+                <form id="leadForm">
+                    <input type="text" id="contactInput" placeholder="Seu WhatsApp ou E-mail" required>
+                    <button type="submit" class="btn-isca">Quero o Checklist Grátis</button>
+                </form>
+                <p id="formResponse" class="form-response"></p>
+            </div>
+        </div>
+    </section>
+    <div id="vip" class="sticky-vip-bar">
+        <div class="vip-text">
+            <strong>🔥 Não perca nenhum cupom do dia!</strong> Entre no canal VIP do Telegram.
+        </div>
+        <a href="https://t.me/seugrupodecupons" target="_blank" class="btn-vip-sticky">Entrar no Grupo VIP</a>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
